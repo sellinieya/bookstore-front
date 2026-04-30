@@ -2,11 +2,11 @@
   <div class="layout">
     <header class="topbar">
       <div class="topbar__inner">
-        <RouterLink class="brand" :to="brandTo">Book Shop</RouterLink>
+        <RouterLink class="brand" to="/">Book Shop</RouterLink>
 
         <nav class="topbar__nav">
           <template v-if="auth.isAuthenticated && auth.isAdmin">
-            <RouterLink class="topbar__link" to="/admin">Acceuil</RouterLink>
+            <RouterLink class="topbar__link" to="/">Acceuil</RouterLink>
             <RouterLink class="topbar__link" to="/admin/books">Books</RouterLink>
             <RouterLink class="topbar__link" to="/admin/authors">Authors</RouterLink>
             <button type="button" class="topbar__btn" @click="logout">Logout</button>
@@ -18,7 +18,7 @@
           </template>
 
           <template v-else>
-            <RouterLink class="topbar__link" to="/login">Acceuil</RouterLink>
+            <RouterLink class="topbar__link" to="/">Acceuil</RouterLink>
             <RouterLink class="topbar__link" to="/login">Login</RouterLink>
           </template>
         </nav>
@@ -32,17 +32,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
 import { RouterLink, RouterView, useRouter } from 'vue-router'
 import { useAuthStore } from './stores/auth'
 
 const router = useRouter()
 const auth = useAuthStore()
-
-const brandTo = computed(() => {
-  if (!auth.isAuthenticated) return '/login'
-  return auth.isAdmin ? '/admin' : '/'
-})
 
 function logout() {
   auth.logout()

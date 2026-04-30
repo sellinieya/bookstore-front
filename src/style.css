@@ -451,6 +451,17 @@ body {
   padding-top: 8px;
 }
 
+.form--inline {
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+}
+
+@media (max-width: 720px) {
+  .form--inline {
+    grid-template-columns: 1fr;
+  }
+}
+
 .btn {
   width: 190px;
   text-align: center;
@@ -605,4 +616,146 @@ body {
 
 .center {
   text-align: center;
+}
+
+.home {
+  width: min(1100px, 100%);
+}
+
+.home-hero {
+  background: #f8fbff;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 12px;
+  padding: 34px 18px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.home-hero__title {
+  margin: 0 0 10px;
+  font-size: 30px;
+}
+
+.home-hero__subtitle {
+  margin: 0;
+  color: var(--muted);
+}
+
+.home-hero__actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.home-section {
+  margin-top: 22px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+
+.home-section__title {
+  margin: 0 0 14px;
+  text-align: center;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+@media (max-width: 900px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card__image {
+  height: 260px;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  place-items: center;
+}
+
+.card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card__placeholder {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.card__body {
+  padding: 12px;
+  display: grid;
+  gap: 6px;
+}
+
+.card__title {
+  font-weight: 900;
+}
+
+.card__meta {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.card__summary {
+  color: var(--text);
+  font-size: 14px;
+  line-height: 145%;
+  max-height: 64px;
+  overflow: hidden;
+}
+
+.card__actions {
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.help-footer {
+  margin-top: 22px;
+  background: linear-gradient(180deg, #111827, #0b1220);
+  color: #e5e7eb;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.help-footer__inner {
+  padding: 22px 18px;
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+}
+
+.help-footer__title {
+  font-weight: 900;
+  font-size: 18px;
+}
+
+.help-footer__text {
+  color: rgba(229, 231, 235, 0.86);
 }
