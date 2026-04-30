@@ -1,9 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
-import AdminView from '../views/AdminView.vue'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import RegisterView from '../views/RegisterView.vue'
+import AdminAuthorsView from '../views/admin/AdminAuthorsView.vue'
+import AdminBooksView from '../views/admin/AdminBooksView.vue'
+import AdminHomeView from '../views/admin/AdminHomeView.vue'
+import BookFormView from '../views/admin/BookFormView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -13,9 +16,14 @@ const router = createRouter({
     { path: '/register', name: 'register', component: RegisterView },
     {
       path: '/admin',
-      name: 'admin',
-      component: AdminView,
       meta: { requiresAuth: true, requiresAdmin: true },
+      children: [
+        { path: '', name: 'admin.home', component: AdminHomeView },
+        { path: 'books', name: 'admin.books', component: AdminBooksView },
+        { path: 'books/new', name: 'admin.books.new', component: BookFormView },
+        { path: 'books/:id/edit', name: 'admin.books.edit', component: BookFormView },
+        { path: 'authors', name: 'admin.authors', component: AdminAuthorsView },
+      ],
     },
   ],
 })
@@ -25,7 +33,7 @@ router.beforeEach((to) => {
   auth.hydrate()
 
   if (to.name === 'login' || to.name === 'register') {
-    if (auth.isAuthenticated) return auth.isAdmin ? { name: 'admin' } : { name: 'home' }
+    if (auth.isAuthenticated) return auth.isAdmin ? { name: 'admin.books' } : { name: 'home' }
     return true
   }
 
