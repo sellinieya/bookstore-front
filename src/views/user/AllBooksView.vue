@@ -53,7 +53,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { getAllAuthors } from '../../services/authors'
-import { filterBooksByYear, getAllBooks, type Book } from '../../services/books'
+import { getAllBooks, type Book } from '../../services/books'
 import { useFavoritesStore } from '../../stores/favorites'
 
 type AuthorMap = Record<number, string>
@@ -64,6 +64,7 @@ fav.hydrate()
 const loading = ref(true)
 const error = ref<string | null>(null)
 const books = ref<Book[]>([])
+const allBooks = ref<Book[]>([])
 const startYear = ref<number | null>(null)
 const endYear = ref<number | null>(null)
 const authorMap = ref<AuthorMap>({})
@@ -93,7 +94,8 @@ async function loadAll() {
   error.value = null
   try {
     await loadAuthors()
-    books.value = await getAllBooks()
+    allBooks.value = await getAllBooks()
+    books.value = allBooks.value
   } catch (e: any) {
     error.value = e?.response?.data?.message ?? 'Failed to load books'
   } finally {
@@ -102,17 +104,17 @@ async function loadAll() {
 }
 
 async function onSearch() {
-  loading.value = true
-  error.value = null
   try {
-    await loadAuthors()
-    const s = typeof startYear.value === 'number' ? startYear.value : undefined
-    const e = typeof endYear.value === 'number' ? endYear.value : undefined
-    books.value = await filterBooksByYear(s, e)
+    const s = typeof startYear.value === 'number' ? startYear.value : null
+    const e = typeof endYear.value === 'number' ? endYear.value : null
+
+    books.value = allBooks.value.filter((b) => {
+      if (s !== null && b.year < s) return false
+      if (e !== null && b.year > e) return false
+      return true
+    })
   } catch (e: any) {
     error.value = e?.response?.data?.message ?? 'Search failed'
-  } finally {
-    loading.value = false
   }
 }
 
