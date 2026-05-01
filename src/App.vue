@@ -14,6 +14,9 @@
 
           <template v-else-if="auth.isAuthenticated">
             <RouterLink class="topbar__link" to="/">Acceuil</RouterLink>
+            <RouterLink class="topbar__link" to="/books">All Books</RouterLink>
+            <RouterLink class="topbar__link" to="/add">Add</RouterLink>
+            <RouterLink class="topbar__link" to="/favorites">Favorites</RouterLink>
             <button type="button" class="topbar__btn" @click="logout">Logout</button>
           </template>
 

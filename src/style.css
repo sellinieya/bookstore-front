@@ -759,3 +759,99 @@ body {
 .help-footer__text {
   color: rgba(229, 231, 235, 0.86);
 }
+
+.searchbar {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 16px;
+}
+
+.searchbar__field {
+  display: grid;
+  gap: 6px;
+}
+
+.searchbar__btn {
+  height: 42px;
+}
+
+@media (max-width: 900px) {
+  .searchbar {
+    grid-template-columns: 1fr;
+  }
+  .searchbar__btn {
+    width: 100%;
+  }
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+@media (max-width: 900px) {
+  .book-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.book-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.book-card__image {
+  height: 200px;
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  place-items: center;
+}
+
+.book-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.book-card__placeholder {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.book-card__body {
+  padding: 12px;
+  text-align: center;
+  display: grid;
+  gap: 8px;
+}
+
+.book-card__title {
+  font-weight: 900;
+  color: #1f2937;
+}
+
+.book-card__year {
+  font-weight: 900;
+  color: #111827;
+}
+
+.book-card__author {
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.book-card__actions {
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+}

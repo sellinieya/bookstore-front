@@ -2,6 +2,9 @@ import { createRouter, createWebHistory } from "vue-router";
 import { useAuthStore } from "../stores/auth";
 import HomeView from "../views/HomeView.vue";
 import ContactView from "../views/ContactView.vue";
+import AllBooksView from "../views/user/AllBooksView.vue";
+import FavoritesView from "../views/user/FavoritesView.vue";
+import UserAddView from "../views/user/UserAddView.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
 import AdminAuthorsView from "../views/admin/AdminAuthorsView.vue";
@@ -13,6 +16,9 @@ const router = createRouter({
   routes: [
     { path: "/", name: "home", component: HomeView },
     { path: "/contact", name: "contact", component: ContactView },
+    { path: "/books", name: "books.all", component: AllBooksView, meta: { requiresAuth: true } },
+    { path: "/add", name: "books.add", component: UserAddView, meta: { requiresAuth: true } },
+    { path: "/favorites", name: "favorites", component: FavoritesView, meta: { requiresAuth: true } },
     { path: "/login", name: "login", component: LoginView },
     { path: "/register", name: "register", component: RegisterView },
     {
@@ -39,7 +45,7 @@ router.beforeEach((to) => {
 
   if (to.name === "login" || to.name === "register") {
     if (auth.isAuthenticated)
-      return auth.isAdmin ? { name: "admin.books" } : { name: "home" };
+      return auth.isAdmin ? { name: "admin.books" } : { name: "books.all" };
     return true;
   }
 

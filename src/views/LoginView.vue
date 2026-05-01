@@ -63,7 +63,7 @@ async function onSubmit() {
       role: data.role,
     })
 
-    await router.push(auth.isAdmin ? '/admin/books' : '/')
+    await router.push(auth.isAdmin ? '/admin/books' : '/books')
   } catch (e: any) {
     error.value = e?.response?.data?.message ?? 'Login failed'
   } finally {

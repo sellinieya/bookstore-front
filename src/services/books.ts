@@ -30,6 +30,15 @@ export async function getAllBooks() {
   return data.listeBooks
 }
 
+export async function filterBooksByYear(startYear?: number, endYear?: number) {
+  const params = new URLSearchParams()
+  if (typeof startYear === 'number') params.set('startYear', String(startYear))
+  if (typeof endYear === 'number') params.set('endYear', String(endYear))
+
+  const { data } = await api.get<{ listeBooks: Book[] }>(`/books/filter?${params.toString()}`)
+  return data.listeBooks
+}
+
 export async function getBookById(id: number) {
   const { data } = await api.get<Book[] | Book>(`/books/search/${id}`)
   if (Array.isArray(data)) return data[0]
